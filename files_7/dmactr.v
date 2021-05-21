@@ -26,7 +26,14 @@ always @ (posedge clk)
             begin
                 if (dreq_ == `Enable_) begin
                     breq_ <= `Enable_;
-                    state <= `Read1;
+                    case (dmode)
+                        `SingleM2M:
+                        state <= `Read1;
+                        `BurstM2M:
+                        state <= `Read4;
+                        default:
+                        state <= `Wait;
+                    endcase
                 end
                 eop_ <= `Disable_;
             end
