@@ -15,6 +15,7 @@ module dmactr (output reg [`BUS_ADDR_WIDTH-1:0] addr, // メモリ・I/Oアド�
 
 reg [2:0] state;
 reg [3:0] rwc4;
+reg [1:0] incw, incr;
 
 always @ (posedge clk)
     if (reset_ == `Enable_) begin
@@ -27,21 +28,14 @@ always @ (posedge clk)
             begin
                 if (dreq_ == `Enable_) begin
                     breq_ <= `Enable_;
-                    case (dmode)
-                        `SingleM2M:
-                        begin
-                            state <= `Read1;
-                        end
-                        `BurstM2M:
-                        begin
-                            state <= `Read4;
-                            rwc4 <= 4;
-                        end
-                        default:
-                        begin
-                            state <= `Wait;
-                        end
-                    endcase
+                    if (dmode == `SingleM2M)
+                        state <= `Read1;
+                    else begin
+                        state <= `Read4;
+                        incr <= 0;
+                        incw <= 0;
+                        rwc4 <= 4;
+                    end
                 end
                 eop_ <= `Disable_;
             end
@@ -53,9 +47,16 @@ always @ (posedge clk)
             end
             `Read4:
             if (bgrt_ == `Enable_) begin
-                addr <= dsaddr;
+                if (dmode == `BurstM2M)
+                    addr <= dsaddr + incr;
+                else if (dmode == `BurstM2IO)
+                    addr <= dsaddr + incr;
+                else if (dmode == `BurstIO2M)
+                    addr <= dsaddr;
+                
                 rw_ <= `Read;
                 state <= `Write4;
+                incw <= incw + 1;
                 rwc4 <= rwc4 - 1;
             end
             `Write1:
@@ -67,21 +68,27 @@ always @ (posedge clk)
             end
             `Write4:
             begin
-                addr <= ddaddr;
-                rw_ <= `Write;
-                odata <= idata;
-                if (rwc4 == 0)
-                    state <= `Complete;
-                else
-                    state <= `Read4;
-            end
-            `Complete:
-            begin
-                eop_ <= `Enable_;
-                breq_ <= `Disable_;
-                state <= `Wait;
-            end
-        endcase
-    end
-endmodule
-
+                if (dmode == `BurstM2M)
+                    addr <= ddaddr + incw - 1;
+                else if (dmode == `BurstM2IO)
+                    addr <= ddaddr;
+                else if (dmode == `BurstIO2M)
+                    addr <= ddaddr + incw - 1;
+                    incr <= incr + 1;
+                    rw_ <= `Write;
+                    odata <= idata;
+                    if (rwc4 == 0)
+                        state <= `Complete;
+                    else
+                        state <= `Read4;
+                    end
+                    `Complete:
+                    begin
+                    eop_ <= `Enable_;
+                    breq_ <= `Disable_;
+                    state <= `Wait;
+                    end
+                    endcase
+                    end
+                    endmodule
+                

@@ -41,6 +41,18 @@ module test ();
         addr <= 10'h150;
         idata <= 0; #10;
         
+        $display("addr = %h odata = %h", addr, odata);
+        
+        #2;
+        rw_ <= `Write;
+        addr <= 10'h151;
+        idata <= 8'h90;
+        
+        #2;
+        
+        rw_ <= `Read;
+        addr <= 10'h151;
+        idata <= 0; #10;
         
         // odata取れた
         $display("addr = %h odata = %h", addr, odata);
@@ -66,6 +78,16 @@ module test ();
         
         #12;
         $display("addr = %h odata = %h", addr, odata);
+        
+        #2
+        // 読み取り
+        breq_ <= `Enable_;
+        rw_ <= `Read;
+        addr <= 10'h161;
+        
+        #12;
+        $display("addr = %h odata = %h", addr, odata);
+        
         
         $finish;
         

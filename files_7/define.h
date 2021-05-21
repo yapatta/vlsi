@@ -23,4 +23,4 @@
 `define SingleM2M 0
 `define BurstM2M 1
 `define BurstM2IO 2
-`define BurstIO2M 4
+`define BurstIO2M 3
