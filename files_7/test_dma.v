@@ -51,6 +51,7 @@ module test ();
         #10;
         breq_ <= `Disable_;
         dreq_ <= `Enable_;
+        // dmode <= `SingleM2M;
         dmode <= `BurstM2M;
         dsaddr <= 10'h150;
         ddaddr <= 10'h160;
