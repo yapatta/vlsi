@@ -1,0 +1,455 @@
+$date
+	Sat May 22 02:43:24 2021
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	10ps
+$end
+$scope module test $end
+$scope module u0 $end
+$var wire 10 ! addr0 [9:0] $end
+$var wire 1 " breq0_ $end
+$var wire 1 # clk $end
+$var wire 10 $ ddaddr [9:0] $end
+$var wire 2 % dmode [1:0] $end
+$var wire 1 & dreq_ $end
+$var wire 10 ' dsaddr [9:0] $end
+$var wire 8 ( idata0 [7:0] $end
+$var wire 8 ) odata0 [7:0] $end
+$var wire 8 * odata1 [7:0] $end
+$var wire 1 + reset_ $end
+$var wire 1 , rw0_ $end
+$var wire 1 - rw_ $end
+$var wire 1 . rw1_ $end
+$var wire 8 / odata [7:0] $end
+$var wire 8 0 idata1 [7:0] $end
+$var wire 8 1 idata [7:0] $end
+$var wire 1 2 eop_ $end
+$var wire 1 3 breq1_ $end
+$var wire 1 4 bgrt1_ $end
+$var wire 1 5 bgrt0_ $end
+$var wire 10 6 addr1 [9:0] $end
+$var wire 10 7 addr [9:0] $end
+$scope module u0 $end
+$var wire 10 8 addr [9:0] $end
+$var wire 1 # clk $end
+$var wire 8 9 idata [7:0] $end
+$var wire 1 + reset_ $end
+$var wire 1 - rw_ $end
+$var wire 8 : odata2 [7:0] $end
+$var wire 8 ; odata1 [7:0] $end
+$var wire 8 < odata0 [7:0] $end
+$var wire 8 = odata [7:0] $end
+$var wire 1 > cs3_ $end
+$var wire 1 ? cs2_ $end
+$var wire 1 @ cs1_ $end
+$var wire 1 A cs0_ $end
+$scope module addrdec $end
+$var wire 10 B addr [9:0] $end
+$var wire 1 > cs3_ $end
+$var wire 1 ? cs2_ $end
+$var wire 1 @ cs1_ $end
+$var wire 1 A cs0_ $end
+$upscope $end
+$scope module timer $end
+$var wire 8 C addr [7:0] $end
+$var wire 1 D clear $end
+$var wire 1 # clk $end
+$var wire 1 ? cs_ $end
+$var wire 8 E idata [7:0] $end
+$var wire 1 + rst_ $end
+$var wire 1 - rw_ $end
+$var wire 1 F start $end
+$var wire 1 G stop $end
+$var wire 8 H odata [7:0] $end
+$var reg 32 I count [31:0] $end
+$var reg 1 J en $end
+$upscope $end
+$scope module u0 $end
+$var wire 8 K addr [7:0] $end
+$var wire 1 # clk $end
+$var wire 1 A cs_ $end
+$var wire 8 L idata [7:0] $end
+$var wire 8 M odata [7:0] $end
+$var wire 1 - rw_ $end
+$upscope $end
+$scope module u1 $end
+$var wire 8 N addr [7:0] $end
+$var wire 1 # clk $end
+$var wire 1 @ cs_ $end
+$var wire 8 O idata [7:0] $end
+$var wire 8 P odata [7:0] $end
+$var wire 1 - rw_ $end
+$upscope $end
+$upscope $end
+$scope module u1 $end
+$var wire 1 " breq0_ $end
+$var wire 1 # clk $end
+$var wire 1 + reset_ $end
+$var wire 1 3 breq1_ $end
+$var wire 1 4 bgrt1_ $end
+$var wire 1 5 bgrt0_ $end
+$var reg 1 Q state $end
+$upscope $end
+$scope module u2 $end
+$var wire 1 4 bgrt_ $end
+$var wire 1 # clk $end
+$var wire 10 R ddaddr [9:0] $end
+$var wire 2 S dmode [1:0] $end
+$var wire 1 & dreq_ $end
+$var wire 10 T dsaddr [9:0] $end
+$var wire 8 U idata [7:0] $end
+$var wire 1 + reset_ $end
+$var reg 10 V addr [9:0] $end
+$var reg 1 3 breq_ $end
+$var reg 1 2 eop_ $end
+$var reg 8 W odata [7:0] $end
+$var reg 1 . rw_ $end
+$var reg 3 X state [2:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#100
+$dumpvars
+bx X
+bx W
+bx V
+bx U
+bx T
+bx S
+bx R
+xQ
+bx P
+bx O
+bx N
+bx M
+bx L
+bx K
+xJ
+bx I
+bx H
+xG
+xF
+bx E
+xD
+bx C
+bx B
+xA
+x@
+x?
+x>
+bx =
+bx <
+bx ;
+bx :
+bx 9
+bx 8
+bx 7
+bx 6
+x5
+x4
+x3
+x2
+bx 1
+bx 0
+bx /
+x.
+x-
+x,
+0+
+bx *
+bx )
+bx (
+bx '
+x&
+bx %
+bx $
+0#
+x"
+bx !
+$end
+#200
+05
+14
+b0 :
+b0 H
+13
+b0 X
+0Q
+0J
+b0 I
+1#
+#300
+0#
+0"
+1&
+1+
+#400
+12
+1#
+#500
+1A
+0@
+1?
+1>
+0D
+0F
+0G
+b1010000 K
+b1010000 N
+b1010000 C
+b10011001 1
+b10011001 9
+b10011001 E
+b10011001 L
+b10011001 O
+b101010000 7
+b101010000 8
+b101010000 B
+0-
+0#
+b10011001 (
+b101010000 !
+0,
+#600
+b10011001 *
+b10011001 U
+b10011001 )
+b10011001 /
+b10011001 =
+b10011001 ;
+b10011001 P
+1#
+#700
+b0 1
+b0 9
+b0 E
+b0 L
+b0 O
+1-
+0#
+b0 (
+1,
+#800
+1#
+#900
+0#
+#1000
+1#
+#1100
+0#
+#1200
+1#
+#1300
+0#
+#1400
+1#
+#1500
+0#
+#1600
+1#
+#1700
+0#
+#1800
+1#
+#1900
+0#
+#2000
+1#
+#2100
+0#
+#2200
+1#
+#2300
+0#
+#2400
+1#
+#2500
+0#
+#2600
+1#
+#2700
+0#
+b101100000 $
+b101100000 R
+b101010000 '
+b101010000 T
+b1 %
+b1 S
+0&
+1"
+#2800
+b1 X
+03
+1#
+#2900
+0#
+1&
+#3000
+xD
+xF
+xG
+xA
+x?
+x@
+x>
+bx *
+bx U
+bx )
+bx /
+bx =
+bx K
+bx ;
+bx P
+bx N
+bx C
+x-
+bx 1
+bx 9
+bx E
+bx L
+bx O
+bx 7
+bx 8
+bx B
+15
+04
+1Q
+1#
+#3100
+0#
+#3200
+b10011001 *
+b10011001 U
+b10011001 )
+b10011001 /
+b10011001 =
+1A
+0@
+1?
+1>
+0D
+0F
+0G
+b1010000 K
+b10011001 ;
+b10011001 P
+b1010000 N
+b1010000 C
+1-
+b101010000 7
+b101010000 8
+b101010000 B
+b10 X
+1.
+b101010000 6
+b101010000 V
+1#
+#3300
+0#
+#3400
+bx *
+bx U
+bx )
+bx /
+bx =
+b1100000 K
+bx ;
+bx P
+b1100000 N
+b1100000 C
+b10011001 1
+b10011001 9
+b10011001 E
+b10011001 L
+b10011001 O
+0-
+b101100000 7
+b101100000 8
+b101100000 B
+b11 X
+b10011001 0
+b10011001 W
+0.
+b101100000 6
+b101100000 V
+1#
+#3500
+0#
+#3600
+b10011001 *
+b10011001 U
+b10011001 )
+b10011001 /
+b10011001 =
+b10011001 ;
+b10011001 P
+b0 X
+13
+02
+1#
+#3700
+0#
+#3800
+12
+1#
+#3900
+0#
+#4000
+1#
+#4100
+0#
+#4200
+1#
+#4300
+0#
+#4400
+1#
+#4500
+0#
+#4600
+1#
+#4700
+0#
+#4800
+1#
+#4900
+0#
+b101100000 !
+0"
+#5000
+1-
+b0 1
+b0 9
+b0 E
+b0 L
+b0 O
+05
+14
+0Q
+1#
+#5100
+0#
+#5200
+1#
+#5300
+0#
+#5400
+1#
+#5500
+0#
+#5600
+1#
+#5700
+0#
+#5800
+1#
+#5900
+0#
+#6000
+1#
+#6100
+0#
