@@ -14,6 +14,7 @@ module dmactr (output reg [`BUS_ADDR_WIDTH-1:0] addr, // メモリ・I/Oアド�
                input clk);
 
 reg [2:0] state;
+reg [3:0] rwc4;
 
 always @ (posedge clk)
     if (reset_ == `Enable_) begin
@@ -28,11 +29,18 @@ always @ (posedge clk)
                     breq_ <= `Enable_;
                     case (dmode)
                         `SingleM2M:
-                        state <= `Read1;
+                        begin
+                            state <= `Read1;
+                        end
                         `BurstM2M:
-                        state <= `Read4;
+                        begin
+                            state <= `Read4;
+                            rwc4 <= 4;
+                        end
                         default:
-                        state <= `Wait;
+                        begin
+                            state <= `Wait;
+                        end
                     endcase
                 end
                 eop_ <= `Disable_;
@@ -43,12 +51,29 @@ always @ (posedge clk)
                 rw_ <= `Read;
                 state <= `Write1;
             end
+            `Read4:
+            if (bgrt_ == `Enable_) begin
+                addr <= dsaddr;
+                rw_ <= `Read;
+                state <= `Write4;
+            end
             `Write1:
             begin
                 addr <= ddaddr;
                 rw_ <= `Write;
                 odata <= idata;
                 state <= `Complete;
+            end
+            `Write4:
+            begin
+                addr <= ddaddr;
+                rw_ <= `Write;
+                odata <= idata;
+                rwc4 <= rwc4 - 1;
+                if (rwc4 == 0)
+                    state <= `Complete;
+                else
+                    state <= `Read4;
             end
             `Complete:
             begin
