@@ -56,6 +56,7 @@ always @ (posedge clk)
                 addr <= dsaddr;
                 rw_ <= `Read;
                 state <= `Write4;
+                rwc4 <= rwc4 - 1;
             end
             `Write1:
             begin
@@ -69,7 +70,6 @@ always @ (posedge clk)
                 addr <= ddaddr;
                 rw_ <= `Write;
                 odata <= idata;
-                rwc4 <= rwc4 - 1;
                 if (rwc4 == 0)
                     state <= `Complete;
                 else
