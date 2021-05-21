@@ -57,6 +57,20 @@ module test ();
         // odata取れた
         $display("addr = %h odata = %h", addr, odata);
         
+		#2;
+        rw_ <= `Write;
+        addr <= 10'h152;
+        idata <= 8'h50;
+        
+        #2;
+        
+        rw_ <= `Read;
+        addr <= 10'h152;
+        idata <= 0; #10;
+        
+        // odata取れた
+        $display("addr = %h odata = %h", addr, odata);
+        
         // DMAによる処理
         
         // DMA転送 Memory-to-Memory
@@ -88,7 +102,16 @@ module test ();
         #12;
         $display("addr = %h odata = %h", addr, odata);
         
+        #2
+        // 読み取り
+        breq_ <= `Enable_;
+        rw_ <= `Read;
+        addr <= 10'h162;
         
+        #12;
+        $display("addr = %h odata = %h", addr, odata);
+        
+
         $finish;
         
     end

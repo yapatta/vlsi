@@ -74,21 +74,22 @@ always @ (posedge clk)
                     addr <= ddaddr;
                 else if (dmode == `BurstIO2M)
                     addr <= ddaddr + incw - 1;
-                    incr <= incr + 1;
-                    rw_ <= `Write;
-                    odata <= idata;
-                    if (rwc4 == 0)
-                        state <= `Complete;
-                    else
-                        state <= `Read4;
-                    end
-                    `Complete:
-                    begin
-                    eop_ <= `Enable_;
-                    breq_ <= `Disable_;
-                    state <= `Wait;
-                    end
-                    endcase
-                    end
-                    endmodule
                 
+                incr <= incr + 1;
+                rw_ <= `Write;
+                odata <= idata;
+                if (rwc4 == 0)
+                    state <= `Complete;
+                else
+                    state <= `Read4;
+            end
+            `Complete:
+            begin
+                eop_ <= `Enable_;
+                breq_ <= `Disable_;
+                state <= `Wait;
+            end
+        endcase
+    end
+endmodule
+
