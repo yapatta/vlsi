@@ -22,7 +22,7 @@ module test ();
         #1;
         $dumpfile("dump.vcd");
         $dumpvars(0, test.u0);
-		$display("Burst: Memory to Memory");
+        $display("Burst: Memory to Memory");
         
         reset_ <= `Enable_;
         #2;
@@ -58,7 +58,7 @@ module test ();
         // odata取れた
         $display("addr = %h odata = %h", addr, odata);
         
-		#2;
+        #2;
         rw_ <= `Write;
         addr <= 10'h152;
         idata <= 8'h50;
@@ -82,8 +82,11 @@ module test ();
         dmode <= `BurstM2M;
         dsaddr <= 10'h150;
         ddaddr <= 10'h160;
-        
-		#20;
+		#2;
+        dreq_ <= `Disable_;
+    
+
+        #20;
         // 読み取り
         breq_ <= `Enable_;
         rw_ <= `Read;
@@ -106,72 +109,81 @@ module test ();
         #12;
         $display("addr = %h odata = %h", addr, odata);
         
-		
-		
-		// IO to Memory
-		$display("Burst: IO to Memory");
-		reset_ <= `Enable_;
-        #2;
-        reset_ <= `Disable_;
-        #2;
-
+        
+        
+        // IO to Memory
+        $display("Burst: IO to Memory");
+        
         // カウンタのクリア
         rw_ <= `Write; addr <= 10'h204; idata <= 1; #2;
-
+        
         // カウンタのストップ
         rw_ <= `Write; addr <= 10'h204; idata <= 4; #2;
         // カウンタのスタート
         rw_ <= `Write; addr <= 10'h204; idata <= 2; #2;
-
+        
         // ウェイト
         #30;
-
+        
         // カウンタのストップ
         rw_ <= `Write; addr <= 10'h204; idata <= 4; #2;
-
+        
         // カウンタのリード
         rw_ <= `Read; addr <= 10'h200; #2;
-
-		$display("addr=%h odata=%h", addr, odata);
-
-     	#2;
+        
+        $display("addr = %h odata = %h", addr, odata);
+        
+        #2;
         dmode <= `BurstIO2M;
         breq_ <= `Disable_;
         dreq_ <= `Enable_;
         dsaddr <= 10'h200;
         ddaddr <= 10'h170;
         
-		#20;
+		#2;
+		dreq_ <= `Disable_;
+        
+        #20;
         // 読み取り
         breq_ <= `Enable_;
         rw_ <= `Read;
-		idata <= 0;
+        idata <= 0;
         addr <= 10'h170;
         
         #12;
-        $display("addr=%h odata=%h", addr, odata);
-    	
-		// Memory to IO
-		$display("Burst: Memory to IO");
-	
-		dmode <= `BurstM2IO;
+        $display("addr = %h odata = %h", addr, odata);
+        
+        // Memory to IO
+        $display("Burst: Memory to IO");
+        #2;
+        rw_ <= `Write;
+        addr <= 10'h173;
+        idata <= 8'h42;
+        
+        #2;
+		rw_ <= `Read;
+        
+        dmode <= `BurstM2IO;
         breq_ <= `Disable_;
         dreq_ <= `Enable_;
         dsaddr <= 10'h170;
-        ddaddr <= 10'h220;
-
-		#20;
-		// 読み取り
+        ddaddr <= 10'h020;
+		#2;
+        dreq_ <= `Disable_;
+        
+        $display("addr = %h odata = %h", addr, odata);
+        #20;
+        // 読み取り
         breq_ <= `Enable_;
         rw_ <= `Read;
-		idata <= 0;
-        addr <= 10'h220;
-		#10;
-
-        $display("addr=%h odata=%h", addr, odata);
-		// カウンタスタート
-
-
+        idata <= 0;
+        addr <= 10'h020;
+        #10;
+        
+        $display("addr = %h odata = %h", addr, odata);
+        // カウンタスタート
+        
+        
         $finish;
         
     end

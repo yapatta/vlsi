@@ -14,14 +14,18 @@ module dmactr (output reg [`BUS_ADDR_WIDTH-1:0] addr, // メモリ・I/Oアド�
                input clk);
 
 reg [2:0] state;
-reg [3:0] rwc4;
-reg [1:0] incw, incr;
+reg [2:0] rwc4;
+reg [2:0] incw, incr;
 
 always @ (posedge clk)
     if (reset_ == `Enable_) begin
         // stateの初期化を怠るとちゃんと動かないので注意！
+		eop_ <= `Disable_;
         state <= `Wait;
         breq_ <= `Disable_;
+		addr <= 0;
+		odata <= 0;
+		rw_ <= `Read;
         end else begin
         case (state)
             `Wait:
@@ -88,6 +92,10 @@ always @ (posedge clk)
                 eop_ <= `Enable_;
                 breq_ <= `Disable_;
                 state <= `Wait;
+				rw_ <= `Read;
+				// 以前の転送結果を消す
+				odata <= 0;
+				addr <= 0;
             end
         endcase
     end
